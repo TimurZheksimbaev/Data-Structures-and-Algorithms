@@ -144,7 +144,7 @@ public:
 };
 
 int main() {
-    //Implementation of Kruskal's algorithm
+    //Implementation of Dijkstra algorithm
     Graph<string, int> graph = Graph<string, int>();
 
     Graph<string, int>::Vertex *A = graph.addVertex("A");
