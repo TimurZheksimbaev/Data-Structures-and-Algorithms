@@ -68,7 +68,13 @@ public:
     }
 
     void printMatrix() {
+        cout << "  ";
+        for (int i = 0; i < vertices; i++)
+            cout << i+1 << ' ';
+        cout << '\n';
+
         for (int i = 0; i < vertices; i++) {
+            cout << i+1 << ' ';
             for (int j = 0; j < vertices; j++) {
                 cout << adjMatrix[i][j] << ' ';
             }
@@ -145,7 +151,15 @@ public:
     }
 };
 
+// input number of vertices and then edges as a matrix
+// for example
+/*
+2
+1 2
+3 4
+ */
 int main() {
+
     int n;
     cin >> n;
 
@@ -158,6 +172,6 @@ int main() {
         }
     }
 
-    graph.shortestPath(0, 2);
+    graph.printMatrix();
     return 0;
 }
