@@ -145,11 +145,11 @@ public:
         return result;
     }
 
-    pair<Vertex, Vertex> getEdge(Vertex u, Vertex v) { // returns vertices between this edge
+    Edge getEdge(Vertex u, Vertex v) { // returns vertices between this edge
         for (Edge edge : edges)
             if ((edge->from->value == u.value && edge->from->ID == u.ID)
                 && (edge->to->value == v.value && edge->to->ID == v.ID))
-                return make_pair(u, v);
+                return edge;
         cout << "Edge was not found!!!";
         return;
     }
