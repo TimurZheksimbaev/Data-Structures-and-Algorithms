@@ -17,42 +17,41 @@ import java.util.*;
 */
 
 public class RandomNumber {
-    public static void quickSort(double[][] arr, int begin, int end) {
-        if (begin < end) {
-            int partitionIndex = partition(arr, begin, end);
-
-            quickSort(arr, begin, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, end);
+    void countingSort(double arr[])
+    {
+        int n = arr.length;
+ 
+        // The output character array that will have sorted
+        // arr
+         double[] output[] = new double[n];
+ 
+        // Create a count array to store count of individual
+        // characters and initialize count array as 0
+        int count[] = new int[500];
+        for (int i = 0; i < 500; ++i)
+            count[i] = 0;
+ 
+        // store count of each character
+        for (int i = 0; i < n; ++i)
+            count[arr[i]]++;
+ 
+        // Change count[i] so that count[i] now contains
+        // actual position of this character in output array
+        for (int i = 1; i <= 500; ++i)
+            count[i] += count[i - 1];
+ 
+        // Build the output character array
+        // To make it stable we are operating in reverse
+        // order.
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[arr[i]] - 1] = arr[i];
+            count[arr[i]]--;
         }
-    }
-
-    private static int partition(double[][] arr, int begin, int end) {
-        double pivot = arr[end][0];
-        int i = (begin - 1);
-
-        for (int j = begin; j < end; j++) {
-            if (arr[j][0] <= pivot) {
-                i++;
-
-                double swapTemp = arr[i][0];
-                arr[i][0] = arr[j][0];
-                arr[j][0] = swapTemp;
-
-                int swapTemp1 = (int)arr[i][1];
-                arr[i][1] = arr[j][1];
-                arr[j][1] = swapTemp1;
-            }
-        }
-
-        double swapTemp = arr[i + 1][0];
-        arr[i + 1][0] = arr[end][0];
-        arr[end][0] = swapTemp;
-
-        int swapTemp1 = (int)arr[i + 1][1];
-        arr[i + 1][1] = arr[end][1];
-        arr[end][1] = swapTemp1;
-
-        return i + 1;
+ 
+        // Copy the output array to arr, so that arr now
+        // contains sorted characters
+        for (int i = 0; i < n; ++i)
+            arr[i] = output[i];
     }
 
     public static void main(String[] args) {
@@ -78,7 +77,7 @@ public class RandomNumber {
             v[i][1] = i;
         }
 
-        quickSort(v, 0, n-1);
+        countingSort(v);
         System.out.println((int)v[n/2][1]);
     }
 
